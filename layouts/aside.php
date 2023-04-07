@@ -9,7 +9,7 @@ session_start();
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -20,7 +20,7 @@ session_start();
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="#" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Perfil</a>
-                    <a href="./mismascotas.php" class="nav-item nav-link active"><i class="fa fa-cat me-2"></i>Mis mascotas</a>
+                    <a href="./mismascotas.php" class="nav-item nav-link"><i class="fa fa-cat me-2"></i>Mis mascotas</a>
                     <a href="#" class="nav-item nav-link"><i class="fa fa-heartbeat me-2"></i>Veterinaria</a>
 
                 </div>
