@@ -22,15 +22,16 @@ Array.from(forms).forEach(form => {
       Toast.fire({
         icon: 'error',
         title: 'Datos incompletos'
-      })
+      });
 
     }else{
         //Se colocan los valores en el modal
         event.preventDefault();
-        var datos = $(this).serialize();
+        var datos = $(forms).serialize();
+        console.log(datos);
         $.ajax({ 
             type: "POST",
-            url: "./controller/registrar.php",
+            url: "../controller/registrar.php",
             data: datos,
             success: function (r) {
                 console.log(r);
@@ -40,13 +41,17 @@ Array.from(forms).forEach(form => {
                     'Registro exitoso!',
                     'El usuario se registró correctamente!',
                     'success'
-                  );
+                  ).then(function() {
+                    // Redirigir al usuario a la página deseada
+                    window.location.href = '../index.php';
+                  });
                 } else if (jsonData.status == 0) {
                     console.log(jsonData);
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Datos Incorrectos'
-                    });
+                    Swal.fire(
+                      'Registro fallido!',
+                      'El usuario no se registró correctamente!',
+                      'error'
+                    );
                 }
             }
         });
