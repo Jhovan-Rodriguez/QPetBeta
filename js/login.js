@@ -11,7 +11,7 @@ $(document).ready(function () {
             var datos = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: "./controlador/login.php",
+                url: "./controller/login.php",
                 data: datos,
                 success: function (r) {
                     console.log(r);
