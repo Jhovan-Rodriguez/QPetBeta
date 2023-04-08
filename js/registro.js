@@ -28,15 +28,19 @@ Array.from(forms).forEach(form => {
         //Se colocan los valores en el modal
         event.preventDefault();
         var datos = $(this).serialize();
-        $.ajax({
+        $.ajax({ 
             type: "POST",
-            url: "",
+            url: "./controller/registrar.php",
             data: datos,
             success: function (r) {
                 console.log(r);
                 var jsonData = JSON.parse(r);
                 if (jsonData.status == 1) {
-
+                  Swal.fire(
+                    'Registro exitoso!',
+                    'El usuario se registró correctamente!',
+                    'success'
+                  );
                 } else if (jsonData.status == 0) {
                     console.log(jsonData);
                     Toast.fire({

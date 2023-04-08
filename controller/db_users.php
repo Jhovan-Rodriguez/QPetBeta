@@ -5,7 +5,7 @@
 	function search_user($username,$password){
 		global $pdo;
 
-		$sql = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
+		$sql = "SELECT * FROM usuario WHERE username='$username' AND password='$password'";
 		$statement = $pdo->prepare($sql);
 		$statement->execute();
 		$results=$statement->fetchAll();

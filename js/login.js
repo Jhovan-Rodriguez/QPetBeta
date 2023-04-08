@@ -17,7 +17,7 @@ $(document).ready(function () {
                     console.log(r);
                     var jsonData = JSON.parse(r);
                     if (jsonData.status == 1) {
-                        window.location.href = "mismascotas.php";
+                        window.location.href = "./views/mismascotas.php";
                     } else if (jsonData.status == 0) {
                         console.log(jsonData);
                         Toast.fire({
