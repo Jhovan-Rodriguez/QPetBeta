@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/index.css">
 
     <title>Login</title>
+
+
+    
 </head>
 <body>
     <section>
@@ -32,7 +35,7 @@
                     <button type="submit" id="log-button">Log in</button>
                     <div class="register">
                         <p>
-                            ¿Sin cuenta? <a href="./register.php">Regístrate</a>
+                            ¿Sin cuenta? <a href="./views/registro.php">Regístrate</a>
                         </p>
                     </div>
                 </form>
