@@ -2,7 +2,7 @@
 
 	$dsn = 'mysql:dbname=qpet;host=localhost';
 	$user = 'root';
-	$password = '';
+	$password = 'Daniel_12';
 
 	try{
 		$pdo = new PDO($dsn, $user, $password);
