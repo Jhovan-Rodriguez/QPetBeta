@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-//session_start();
+session_start();
+include_once("../controller/db_pets.php");
 ?>
 
 <head>
@@ -30,6 +31,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/mis_mascotas.css">
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
@@ -47,6 +49,7 @@
         <!-- Spinner End -->
         <?php
         include("../layouts/aside.php");
+        $mascotas = get_pets($_SESSION['id']);
         ?>
 
         <!-- Content Start -->
@@ -60,20 +63,61 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Mascotas</h6>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Tipo</th>
-                                    <th scope="col">Raza</th>
-                                    <th scope="col">Edad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php //include("controlador/pets_table.php"); ?>
-                            </tbody>
-                        </table>
+                        <h4 class="mb-4">Mascotas</h4>
+                        <div class="container mt-5 mb-3">
+                            <div class="row">
+                                <?php
+                                foreach ($mascotas as $datos => $data) {
+                                    ?>
+                                    <div class="col-md-4" style="margin-top:10px;">
+                                        <div class="card p-4 mb-2 h-100">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <?php if($data['especie'] == 'Perro'){ ?>
+                                                    <div class="icon"><img src="../img/happy.png" style="width: 75%; height: 75%;" alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php }else{ ?>
+                                                        <div class="icon"><img src="../img/kitty.png" style="width: 75%; height: 75%;" alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php } ?>    
+                                                    <div class="ms-2 c-details">
+                                                        <h6 class="mb-0">
+                                                            <?php echo $data['nombre'] ?>
+                                                        </h6> <span>
+                                                            <?php echo $data['fecha_nacimiento'] ?>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="badge"> <span>
+                                                        <?php echo $data['especie']; ?>
+                                                    </span> </div>
+                                            </div>
+                                            <div class="mt-5">
+                                                <form method="POST" action="mascota.php">
+                                                <input type="hidden" name="id_mascota" value="<?php echo $data['id']; ?>">
+                                                <button type="submit" id="datos_mascota" class="btn btn-outline-primary w-100"
+                                                    ><i
+                                                        class="bi bi-house-heart me-2"></i>Perfil de <?php echo $data['nombre'] ?></button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class="col-md-4" style="margin-top:10px;">
+                                  <div class="card text-center h-100" >
+                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                      <h5 class="card-title">Agregar mascota</h5>
+                                        <a href="registro_mascota.php">
+                                            <button type="button" class="btn btn-lg btn-lg-square btn-outline-primary m-2">
+                                              <i class="bi bi-house-heart"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

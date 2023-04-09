@@ -9,18 +9,28 @@
 	}
 	
 	//Funcion que cuenta los estados que se encuentran registrados en la base de datos
-	function get_pets(){
+	function get_pets($duehno){
 		global $pdo;
         
         $owner = $_SESSION['user'];
-		debug_to_console($owner);
-
-		$sql = "SELECT nombre, tipo, raza, edad FROM mascotas WHERE dueño='$owner'";
+		#$duehno = $_SESSION['id'];
+		$sql = "SELECT * FROM mascota WHERE id_usuario='$duehno'";
 		$statement = $pdo->prepare($sql);
 		$statement->execute();
 		$results=$statement->fetchAll();
 
 		return $results;
 	}
+
+	function search_pet($id_pet){
+		global $pdo;
+		$sql = "SELECT * FROM mascota WHERE id='$id_pet'";
+		$statement = $pdo->prepare($sql);
+		$statement->execute();
+		$results=$statement->fetchAll();
+
+		return $results;
+	}
+
 ?>
 

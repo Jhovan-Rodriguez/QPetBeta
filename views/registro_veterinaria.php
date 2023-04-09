@@ -58,7 +58,7 @@ session_start();
             <!-- Navbar End -->
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="col-sm-12 col-xl-6">
+                <div class="col-sm-12">
                     <div class="bg-light rounded h-100 p-4">
                         <h3 class="mb-4">Registro veterinaria</h3>
                         <form action="" id="form_veterinaria" class="needs-validation" novalidate>
