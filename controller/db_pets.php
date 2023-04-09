@@ -1,5 +1,6 @@
 <?php
 	include('connection.php');
+
 	function debug_to_console($data) {
 		$output = $data;
 		if (is_array($output))
