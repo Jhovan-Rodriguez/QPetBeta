@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 08-04-2023 a las 02:26:21
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.0.25
+-- Servidor: localhost:3306
+-- Tiempo de generación: 08-04-2023 a las 03:57:55
+-- Versión del servidor: 8.0.32-0ubuntu0.22.04.2
+-- Versión de PHP: 8.1.2-1ubuntu2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cita` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `fecha_hora` datetime NOT NULL,
-  `estado` tinyint(4) NOT NULL,
+  `estado` tinyint NOT NULL,
   `valoracion` float NOT NULL,
-  `comentario` varchar(255) NOT NULL
+  `comentario` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE `cita` (
 --
 
 CREATE TABLE `cita_veterinario_mascota` (
-  `id_mascota` int(11) NOT NULL,
-  `id_veterinario` int(11) NOT NULL,
-  `id_cita` int(11) NOT NULL
+  `id_mascota` int NOT NULL,
+  `id_veterinario` int NOT NULL,
+  `id_cita` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -54,9 +54,9 @@ CREATE TABLE `cita_veterinario_mascota` (
 --
 
 CREATE TABLE `comentarios` (
-  `id` int(11) NOT NULL,
-  `comentario` varchar(255) NOT NULL,
-  `id_veterinario` int(11) NOT NULL
+  `id` int NOT NULL,
+  `comentario` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_veterinario` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -66,16 +66,16 @@ CREATE TABLE `comentarios` (
 --
 
 CREATE TABLE `mascota` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `especie` varchar(50) NOT NULL,
-  `raza` varchar(50) NOT NULL,
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `especie` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `raza` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `peso` double NOT NULL,
   `altura` double NOT NULL,
-  `sexo` tinyint(4) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `descripcion` varchar(255) NOT NULL
+  `sexo` tinyint NOT NULL,
+  `id_usuario` int NOT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -85,24 +85,25 @@ CREATE TABLE `mascota` (
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `apellido_p` varchar(40) NOT NULL,
-  `apellido_m` varchar(40) NOT NULL,
-  `telefono` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `fecha_nacimientno` date NOT NULL,
-  `genero` tinyint(4) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido_p` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
+  `apellido_m` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefono` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `genero` tinyint NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `username`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `email`, `fecha_nacimientno`, `genero`, `password`) VALUES
-(1, 'jhovan', 'Jhovan', 'Rodriguez', 'Moreno', '8341061102', 'jrdzmoreni@gmail.com', '2017-09-02', 1, '123');
+INSERT INTO `usuario` (`id`, `username`, `nombre`, `apellido_p`, `apellido_m`, `telefono`, `email`, `fecha_nacimiento`, `genero`, `password`) VALUES
+(1, 'jhovan', 'Jhovan', 'Rodriguez', 'Moreno', '8341061102', 'jrdzmoreni@gmail.com', '2017-09-02', 1, '123'),
+(2, 'danma22', 'Daniel Eduardo', 'Macias', 'Estrada', '8342556155', 'danma1708@gmail.com', '2002-06-02', 1, 'Daniel_12');
 
 -- --------------------------------------------------------
 
@@ -111,17 +112,24 @@ INSERT INTO `usuario` (`id`, `username`, `nombre`, `apellido_p`, `apellido_m`, `
 --
 
 CREATE TABLE `veterinaria` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `colonia` varchar(50) NOT NULL,
-  `calle` varchar(50) NOT NULL,
-  `codigo_postal` smallint(6) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `horario` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`horario`)),
-  `estado` tinyint(4) NOT NULL,
-  `activo` tinyint(4) NOT NULL,
-  `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `colonia` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `calle` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `codigo_postal` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `telefono` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `horario` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `estado` tinyint NOT NULL,
+  `activo` tinyint NOT NULL,
+  `id_usuario` int NOT NULL
+) ;
+
+--
+-- Volcado de datos para la tabla `veterinaria`
+--
+
+INSERT INTO `veterinaria` (`id`, `nombre`, `colonia`, `calle`, `codigo_postal`, `telefono`, `horario`, `estado`, `activo`, `id_usuario`) VALUES
+(1, 'Milmascotas', 'Mainero', 'Naciones Unidas', '87049', '8342556155', '{\"lunes-viernes\":{\"hora_inicio\":\"08:00\",\"hora_fin\":\"18:00\"},\"sábado\":{\"hora_inicio\": \"09:00\",\"hora_fin\": \"13:00\"},\"domingo\":{\"hora_inicio\":\"09:00\",\"hora_fin\":\"13:00\"}}', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -130,8 +138,8 @@ CREATE TABLE `veterinaria` (
 --
 
 CREATE TABLE `veterinario_mascota` (
-  `id_mascota` int(11) NOT NULL,
-  `id_veterinaria` int(11) NOT NULL
+  `id_mascota` int NOT NULL,
+  `id_veterinaria` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -194,31 +202,31 @@ ALTER TABLE `veterinario_mascota`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
 ALTER TABLE `mascota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `veterinaria`
 --
 ALTER TABLE `veterinaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
