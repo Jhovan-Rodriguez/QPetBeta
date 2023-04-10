@@ -19,12 +19,6 @@
     } else {
         $result['status'] = 1;
         echo json_encode($result);
-        // if (password_verify($password, $result['PASSWORD'])) {
-        //     $_SESSION['user_id'] = $result['ID'];
-        //     echo '<p class="success">Congratulations, you are logged in!</p>';
-        // } else {
-        //     echo '<p class="error">Username password combination is wrong!</p>';
-        // }
     }
 
 ?>

@@ -24,6 +24,7 @@ session_start();
                     <a href="./perfil.php" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Perfil</a>
                     <a href="./mismascotas.php" class="nav-item nav-link"><i class="fa fa-cat me-2"></i>Mis mascotas</a>
                     <a href="./misveterinarias.php" class="nav-item nav-link"><i class="fa fa-heartbeat me-2"></i>Mis veterinaria</a>
+                    <a href="./mi_vet.php" class="nav-item nav-link"><i class="fa fa-medkit me-2"></i>Mi Veterinaria</a>
                 </div>
             </nav>
         </div>

@@ -73,11 +73,15 @@ include_once("../controller/db_pets.php");
                                         <div class="card p-4 mb-2 h-100">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex flex-row align-items-center">
-                                                    <?php if($data['especie'] == 'Perro'){ ?>
-                                                    <div class="icon"><img src="../img/happy.png" style="width: 75%; height: 75%;" alt="<?php echo $data['nombre'] ?>"></div>
-                                                    <?php }else{ ?>
-                                                        <div class="icon"><img src="../img/kitty.png" style="width: 75%; height: 75%;" alt="<?php echo $data['nombre'] ?>"></div>
-                                                    <?php } ?>    
+                                                    <?php if ($data['especie'] == 'Perro') { ?>
+                                                        <div class="icon"><img src="../img/happy.png"
+                                                                style="width: 75%; height: 75%;"
+                                                                alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php } else { ?>
+                                                        <div class="icon"><img src="../img/kitty.png"
+                                                                style="width: 75%; height: 75%;"
+                                                                alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php } ?>
                                                     <div class="ms-2 c-details">
                                                         <h6 class="mb-0">
                                                             <?php echo $data['nombre'] ?>
@@ -92,10 +96,13 @@ include_once("../controller/db_pets.php");
                                             </div>
                                             <div class="mt-5">
                                                 <form method="POST" action="mascota.php">
-                                                <input type="hidden" name="id_mascota" value="<?php echo $data['id']; ?>">
-                                                <button type="submit" id="datos_mascota" class="btn btn-outline-primary w-100"
-                                                    ><i
-                                                        class="bi bi-house-heart me-2"></i>Perfil de <?php echo $data['nombre'] ?></button>
+                                                    <input type="hidden" name="id_mascota"
+                                                        value="<?php echo $data['id']; ?>">
+                                                    <button type="submit" id="datos_mascota"
+                                                        class="btn btn-outline-primary w-100"><i
+                                                            class="bi bi-house-heart me-2"></i>Perfil de
+                                                        <?php echo $data['nombre'] ?>
+                                                    </button>
                                                 </form>
 
                                             </div>
@@ -105,16 +112,18 @@ include_once("../controller/db_pets.php");
                                 }
                                 ?>
                                 <div class="col-md-4" style="margin-top:10px;">
-                                  <div class="card text-center h-100" >
-                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                      <h5 class="card-title">Agregar mascota</h5>
-                                        <a href="registro_mascota.php">
-                                            <button type="button" class="btn btn-lg btn-lg-square btn-outline-primary m-2">
-                                              <i class="bi bi-house-heart"></i>
-                                            </button>
-                                        </a>
+                                    <div class="card text-center h-100">
+                                        <div
+                                            class="card-body d-flex flex-column justify-content-center align-items-center">
+                                            <h5 class="card-title">Agregar mascota</h5>
+                                            <a href="registro_mascota.php">
+                                                <button type="button"
+                                                    class="btn btn-lg btn-lg-square btn-outline-primary m-2">
+                                                    <i class="bi bi-house-heart"></i>
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -135,6 +144,8 @@ include_once("../controller/db_pets.php");
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/chart/chart.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>

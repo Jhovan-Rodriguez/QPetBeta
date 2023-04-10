@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,9 @@
     <title>Login</title>
 
 
-    
+
 </head>
+
 <body>
     <section>
         <div class="form-box">
@@ -49,4 +51,5 @@
     <script src="dist/js/adminlte.min.js"></script>
     <script src="js/login.js"></script>
 </body>
+
 </html>
