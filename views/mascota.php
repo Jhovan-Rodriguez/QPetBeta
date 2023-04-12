@@ -2,6 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
 include("../controller/db_pets.php");
 $id_mascota = $_REQUEST['id_mascota'];
 ?>

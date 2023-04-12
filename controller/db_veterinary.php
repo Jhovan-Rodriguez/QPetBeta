@@ -47,13 +47,11 @@ function get_patients($id_owner)
 			FROM mascota AS m 
 			JOIN veterinario_mascota AS vm ON m.id = vm.id_mascota 
 			JOIN veterinaria AS v ON vm.id_veterinaria = v.id 
-			WHERE v.id_usuario = 7";
+			WHERE v.id_usuario = '$id_owner'";
 
 	$statement = $pdo->prepare($sql);
 	$statement->execute();
-	$results = $statement->fetch();
-
-	echo $results;
+	$results = $statement->fetchAll();
 
 	return $results;
 }

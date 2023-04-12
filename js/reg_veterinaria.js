@@ -22,13 +22,38 @@ Array.from(forms).forEach(form => {
       Toast.fire({
         icon: 'error',
         title: 'Datos incompletos'
-      })
-
+      });
     }else{
         //Se colocan los valores en el modal
-        event.preventDefault();
-        var datos = $(this).serialize();
-        
+        event.preventDefault()
+        console.log("hola");
+        var datos = $(forms).serialize();
+        $.ajax({ 
+          type: "POST",
+          url: "../controller/reg_veterinaria.php",
+          data: datos,
+          success: function (r) {
+              console.log(r);
+              var jsonData = JSON.parse(r);
+              if (jsonData.status == 1) {
+                Swal.fire(
+                  'Registro exitoso!',
+                  'La veterinaria se registró correctamente!',
+                  'success'
+                ).then(function() {
+                  // Redirigir al usuario a la página deseada
+                  window.location.href = '../views/mismascotas.php';
+                });
+              } else if (jsonData.status == 0) {
+                  console.log(jsonData);
+                  Swal.fire(
+                    'Registro fallido!',
+                    'La veterinaria no se registró correctamente!',
+                    'error'
+                  );
+              }
+          }
+      });
 
     }
     form.classList.add('was-validated')

@@ -2,6 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
 include_once("../controller/db_veterinary.php");
 ?>
 

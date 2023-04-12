@@ -4,7 +4,10 @@
 include("../controller/db_users.php");
 include("../controller/db_pets.php");
 session_start();
-$user=$_SESSION['user'];
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
+$user = $_SESSION['user'];
 $id_usuario = $_SESSION['id'];
 ?>
 
@@ -62,21 +65,67 @@ $id_usuario = $_SESSION['id'];
             ?>
             <!-- Navbar End -->
             <div class="container-fluid pt-4 px-4">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col">
-                            <?php foreach($info_perfil as $datos=>$data){ ?>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h3>Perfil</h3>
+                        </div>
+                        <?php if($_SESSION['tipo_usuario']==1){ ?>
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-outline-primary m-2" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"><i class="fa fa-hospital m-2"></i>Añadir mi
+                                veterinaria</button>
+                        </div>
+                        <?php } ?>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Suscripción QPet</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Para registrar tu veterinaria es necesario que pagues la suscripción QPet! <br>
+                                        Al pagar la suscipción mensual de <strong>$120 MXN</strong> tú veterinaria les aparecerá a todos nuestros usuarios!
+                                        <form>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Número de tarjeta</label>
+                                            <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Ingrese su número de tarjeta">
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">CVV</label>
+                                            <input type="number" class="form-control" placeholder="Ingrese el CVV de su tarjeta">
+                                          </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <a href="registro_veterinaria.php"><button type="button" class="btn btn-success"><i class="bi bi-cash-coin m-2"></i>Pagar</button></a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col">
+                            <?php foreach ($info_perfil as $datos => $data) { ?>
                                 <div class="card p-3 py-4" id="card_principal">
                                     <div class="text-center">
-                                        <?php if($data['genero']==1){ ?>
-                                        <img src="../img/dueno.png" width="100" class="rounded">
-                                        <?php }else{ ?>
+                                        <?php if ($data['genero'] == 1) { ?>
+                                            <img src="../img/dueno.png" width="100" class="rounded">
+                                        <?php } else { ?>
                                             <img src="../img/duena.png" width="100" class="rounded">
-                                        <?php } ?>    
+                                        <?php } ?>
                                     </div>
                                     <div class="text-center mt-3">
                                         <span class="bg-secondary p-1 px-4 rounded text-white">Username</span>
-                                        <h5 class="mt-2 mb-0"><?php echo $data['username'] ?></h5>
+                                        <h5 class="mt-2 mb-0">
+                                            <?php echo $data['username'] ?>
+                                        </h5>
                                         <br>
                                         <br>
                                         <h5>Información</h5>
@@ -84,27 +133,37 @@ $id_usuario = $_SESSION['id'];
                                         <div class="row">
                                             <div class="col">
                                                 <h6>Nombre</h6>
-                                                <p><?php echo $data['nombre']." ".$data['apellido_p']." ".$data['apellido_m'] ?></p>
+                                                <p>
+                                                    <?php echo $data['nombre'] . " " . $data['apellido_p'] . " " . $data['apellido_m'] ?>
+                                                </p>
                                                 <br>
                                                 <h6>E-mail</h6>
-                                                <p><?php echo $data['email']; ?></p>
+                                                <p>
+                                                    <?php echo $data['email']; ?>
+                                                </p>
                                                 <br>
                                                 <h6>Genero</h6>
-                                                <?php if($data['genero']==1){ ?>
+                                                <?php if ($data['genero'] == 1) { ?>
                                                     <p>Masculino</p>
-                                                <?php } else{ ?>    
-                                                <p>Femenino</p>
+                                                <?php } else { ?>
+                                                    <p>Femenino</p>
                                                 <?php } ?>
                                             </div>
                                             <div class="col">
                                                 <h6>Username</h6>
-                                                <p><?php echo $data['username'] ?></p>
+                                                <p>
+                                                    <?php echo $data['username'] ?>
+                                                </p>
                                                 <br>
                                                 <h6>Teléfono</h6>
-                                                <p><?php echo $data['telefono'] ?></p>
+                                                <p>
+                                                    <?php echo $data['telefono'] ?>
+                                                </p>
                                                 <br>
                                                 <h6>Fecha de nacimiento</h6>
-                                                <p><?php echo $data['fecha_nacimiento'] ?></p>
+                                                <p>
+                                                    <?php echo $data['fecha_nacimiento'] ?>
+                                                </p>
                                             </div>
                                         </div>
                                     <?php } ?>
@@ -112,44 +171,48 @@ $id_usuario = $_SESSION['id'];
                                     <h5>Mascotas</h5>
                                     <hr>
                                     <div class="row">
-                                <?php
-                                if($user_mascotas != NULL){
-                                    foreach ($user_mascotas as $datos => $data) {
-                                    ?>
-                                    <div class="col-md-4" style="margin-top:10px;">
-                                        <div class="card p-4 mb-2 h-100">
-                                            <div class="d-flex justify-content-between">
-                                                <div class=" flex-row align-items-center">
-                                                    <?php if($data['especie'] == 'Perro'){ ?>
-                                                    <div class="icon mb-3"><img src="../img/happy.png" style="width: 25%; height: 25%;" alt="<?php echo $data['nombre'] ?>"></div>
-                                                    <?php }else{ ?>
-                                                        <div class="icon"><img src="../img/kitty.png" style="width: 25%; height: 25%;" alt="<?php echo $data['nombre'] ?>"></div>
-                                                    <?php } ?>    
-                                                    <div class="c-details">
-                                                        <h6 class="mb-0">
-                                                            <?php echo $data['nombre'] ?>
-                                                        </h6> <span>
-                                                            <?php echo $data['fecha_nacimiento'] ?>
-                                                        </span>
+                                        <?php
+                                        if ($user_mascotas != NULL) {
+                                            foreach ($user_mascotas as $datos => $data) {
+                                                ?>
+                                                <div class="col-md-4" style="margin-top:10px;">
+                                                    <div class="card p-4 mb-2 h-100">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class=" flex-row align-items-center">
+                                                                <?php if ($data['especie'] == 'Perro') { ?>
+                                                                    <div class="icon mb-3"><img src="../img/happy.png"
+                                                                            style="width: 25%; height: 25%;"
+                                                                            alt="<?php echo $data['nombre'] ?>"></div>
+                                                                <?php } else { ?>
+                                                                    <div class="icon"><img src="../img/kitty.png"
+                                                                            style="width: 25%; height: 25%;"
+                                                                            alt="<?php echo $data['nombre'] ?>"></div>
+                                                                <?php } ?>
+                                                                <div class="c-details">
+                                                                    <h6 class="mb-0">
+                                                                        <?php echo $data['nombre'] ?>
+                                                                    </h6> <span>
+                                                                        <?php echo $data['fecha_nacimiento'] ?>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="badge"> <span>
+                                                                    <?php echo $data['especie']; ?>
+                                                                </span> </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="badge"> <span>
-                                                        <?php echo $data['especie']; ?>
-                                                    </span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                }
-                            }else{ ?>
-                            <h3>No cuenta con mascotas</h3>
-                            <?php } ?>
-                            </div>
+                                                <?php
+                                            }
+                                        } else { ?>
+                                            <h3>No cuenta con mascotas</h3>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <!-- Sale & Revenue End -->
             <?php

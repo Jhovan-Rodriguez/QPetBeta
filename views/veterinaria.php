@@ -2,6 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
 include("../controller/db_veterinary.php");
 $id_veterinaria = $_REQUEST['id_veterinaria'];
 ?>
@@ -283,6 +286,8 @@ $id_veterinaria = $_REQUEST['id_veterinaria'];
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script> 
     <script src="../lib/chart/chart.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>

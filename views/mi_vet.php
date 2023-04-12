@@ -2,6 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
 include_once("../controller/db_veterinary.php");
 ?>
 
@@ -95,7 +98,7 @@ include_once("../controller/db_veterinary.php");
                                                         <?php echo $data['especie']; ?>
                                                     </span> </div>
                                             </div>
-                                            
+
                                             <div class="mt-5">
                                                 <form method="POST" action="mascota.php">
                                                     <input type="hidden" name="id_mascota"
@@ -115,20 +118,6 @@ include_once("../controller/db_veterinary.php");
                                 
                                 ?>
 
-                                <div class="col-md-4" style="margin-top:10px;">
-                                    <div class="card text-center h-100">
-                                        <div
-                                            class="card-body d-flex flex-column justify-content-center align-items-center">
-                                            <h5 class="card-title">Agregar mascota</h5>
-                                            <a href="registro_mascota.php">
-                                                <button type="button"
-                                                    class="btn btn-lg btn-lg-square btn-outline-primary m-2">
-                                                    <i class="bi bi-house-heart"></i>
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

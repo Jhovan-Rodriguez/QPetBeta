@@ -28,7 +28,6 @@ Array.from(forms).forEach(form => {
         //Se colocan los valores en el modal
         event.preventDefault();
         var datos = $(forms).serialize();
-        console.log(datos);
         $.ajax({ 
             type: "POST",
             url: "../controller/reg_mascota.php",

@@ -18,6 +18,7 @@ $(document).ready(function() {
             type: 'POST',
             data: data,
             success: function(response) {
+                response = JSON.parse(response);
                 if (response.status == 1){
                     Swal.fire(
                         'Registro exitoso!',
@@ -33,12 +34,6 @@ $(document).ready(function() {
                 }
             }
         });
-
-        Swal.fire(
-            'Registro exitoso!',
-            'La cita se agendó correctamente!',
-            'success'
-        )
     });
 });
   

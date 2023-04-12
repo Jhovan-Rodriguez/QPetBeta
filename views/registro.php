@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
-
+<?php
+session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
+?>
 <head>
     <meta charset="utf-8">
     <title>Registro</title>

@@ -2,6 +2,11 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
+include_once("../controller/db_users.php");
+
 ?>
 
 <head>
@@ -61,6 +66,9 @@ session_start();
                 <div class="col-sm-12">
                     <div class="bg-light rounded h-100 p-4">
                         <h3 class="mb-4">Registro veterinaria</h3>
+                        <?php
+                        $datos_usuario = search($_SESSION['user']);
+                        ?>
                         <form action="" id="form_veterinaria" class="needs-validation" novalidate>
                         <h6>Datos de veterinaria</h6>
                             <div class="form-group">
@@ -82,7 +90,7 @@ session_start();
                                 <label for="">Descripción</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-envelope-paper-fill"></i></span>
-                                    <textarea required class="form-control"></textarea>
+                                    <textarea required class="form-control" name="descripcion"></textarea>
                                 </div>
                             </div>
                             <br>
@@ -155,58 +163,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <h6>Datos del veterinario</h6>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="colonia">Nombre</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                            <input required readonly type="text" class="form-control" name="nombre" value="Pablo" placeholder="Colonia">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="calle">Apellido paterno</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                            <input required type="text" class="form-control" name="apellido_p" value="Rodriguez" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="nombre">Apellido materno</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                            <input required value="Moreno" readonly  type="text" class="form-control" name="apellido_m">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="colonia">E-mail</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-envelope-at-fill"></i></span>
-                                            <input required readonly type="email" class="form-control" name="email" value="jrdzmoreni@gmail.com" placeholder="Colonia">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="calle">Teléfono</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                                            <input required type="number" class="form-control" name="telefono" value="8341061102" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="nombre">Género</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text"><i class="bi bi-heart-fill"></i></span>
-                                            <input required value="Masculino" readonly  type="text" class="form-control" name="genero">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <br>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button class="btn btn-outline-success me-md-2" type="submit">Registrar

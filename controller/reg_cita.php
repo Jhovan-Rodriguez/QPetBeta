@@ -8,17 +8,13 @@
     $mascota=$_REQUEST['mascota'];
     $comentario=$_REQUEST['comentario'];
 
-    if(count($usuario)==0){
-        $sql = "INSERT INTO cita(fecha, hora, comentario, id_veterinaria, id_mascota) VALUES('$fecha','$hora','$comentario','$id_veterinaria','$mascota')";
-        $statement = $pdo->prepare($sql);
-        $statement->execute();
-        if (!$statement) {
-            echo json_encode(array('status' => 0));
-        } else {
-            echo json_encode(array('status' => 1));
-        }
-    }else{
+    $sql = "INSERT INTO cita(fecha, hora, comentario, id_veterinaria, id_mascota) VALUES('$fecha','$hora','$comentario','$id_veterinaria','$mascota')";
+    $statement = $pdo->prepare($sql);
+    $statement->execute();
+    if (!$statement) {
         echo json_encode(array('status' => 0));
+    } else {
+        echo json_encode(array('status' => 1));
     }
 
 ?>

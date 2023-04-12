@@ -2,6 +2,9 @@
 <html lang="en">
 <?php
 session_start();
+if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
+    header("Location:./404.php");
+}
 ?>
 
 <head>
@@ -179,7 +182,7 @@ session_start();
     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Template Javascript -->
+    <!-- Template Javascript --> 
     <script src="../js/main.js"></script>
     <script src="../js/reg_mascota.js"></script>
 </body>
