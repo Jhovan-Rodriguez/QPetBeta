@@ -12,10 +12,10 @@
     $genero=$_REQUEST['genero'];
     $fecha_nac=$_REQUEST['fecha_nac'];
     $password=$_REQUEST['pass'];
-
     $usuario=search($username);
+
     if(count($usuario)==0){
-        $sql = "INSERT INTO usuario(username,nombre,apellido_p,apellido_m,telefono,email,fecha_nacimiento,genero,password) VALUES('$username','$nombre','$apellido_p','$apellido_m','$tel','$email','$fecha_nac','$genero','$password')";
+        $sql = "INSERT INTO usuario(username,nombre,apellido_p,apellido_m,telefono,email,fecha_nacimiento,genero,password,tipo_usuario) VALUES('$username','$nombre','$apellido_p','$apellido_m','$tel','$email','$fecha_nac','$genero','$password','1')";
         $statement = $pdo->prepare($sql);
         $statement->execute();
         if (!$statement) {

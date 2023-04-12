@@ -1,8 +1,8 @@
 <?php
 
-	$dsn = 'mysql:dbname=qpet;host=localhost';
-	$user = 'admin';
-	$password = '509a10d50e7ed65a4a1a0c6817a67fe07f985c973d275989';
+	$dsn = 'mysql:dbname=qpet2;host=localhost';
+	$user = 'root';
+	$password = '';
 
 	try{
 		$pdo = new PDO($dsn, $user, $password);
