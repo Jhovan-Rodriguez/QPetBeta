@@ -82,4 +82,20 @@ function get_pets($duehno)
 	return $results;
 }
 
+function get_citas($id_usuario){
+	global $pdo;
+
+	$sql = "SELECT m.nombre,m.especie,c.* 
+	FROM veterinaria AS v 
+	JOIN cita AS c ON v.id = c.id_veterinaria 
+	JOIN mascota AS m ON m.id = c.id_mascota 
+	WHERE v.id_usuario = '$id_usuario';";
+	$statement = $pdo->prepare($sql);
+	$statement->execute();
+	$results = $statement->fetchAll();
+
+	return $results;
+}
+
+
 ?>

@@ -51,7 +51,7 @@ include_once("../controller/db_veterinary.php");
         <!-- Spinner End -->
         <?php
         include("../layouts/aside.php");
-        $mascotas = get_patients($_SESSION['id']);
+        $citas = get_citas($_SESSION['id']);
         ?>
 
         <!-- Content Start -->
@@ -65,12 +65,11 @@ include_once("../controller/db_veterinary.php");
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="bg-light rounded h-100 p-4">
-                        <h4 class="mb-4">Pacientes Mascota</h4>
+                        <h4 class="mb-4">Pacientes en cita</h4>
                         <div class="container mt-5 mb-3">
                             <div class="row">
                                 <?php
-                                
-                                foreach ($mascotas as $datos => $data) {
+                                foreach ($citas as $datos => $data) {
                                     ?>
                                     <div class="col-md-4" style="margin-top:10px;">
                                         <div class="card p-4 mb-2 h-100">
@@ -89,8 +88,9 @@ include_once("../controller/db_veterinary.php");
                                                         <h6 class="mb-0">
                                                             <?php echo $data['nombre'] ?>
                                                         </h6> <span>
-                                                            <?php echo $data['fecha_nacimiento'] ?>
-                                                        </span>
+                                                            <?php echo $data['fecha'] ?>
+                                                        </span><br>
+                                                        <span><?php echo $data['hora'] ?></span>
                                                     </div>
                                                 </div>
                                                 <div class="badge"> <span>
@@ -99,13 +99,12 @@ include_once("../controller/db_veterinary.php");
                                             </div>
 
                                             <div class="mt-5">
-                                                <form method="POST" action="mascota.php">
-                                                    <input type="hidden" name="id_mascota"
+                                                <form method="POST" action="cita.php">
+                                                    <input type="hidden" name="id_cita"
                                                         value="<?php echo $data['id']; ?>">
                                                     <button type="submit" id="datos_mascota"
                                                         class="btn btn-outline-primary w-100"><i
-                                                            class="bi bi-house-heart me-2"></i>Perfil de
-                                                        <?php echo $data['nombre'] ?>
+                                                            class="bi bi-house-heart me-2"></i>Ver cita
                                                     </button>
                                                 </form>
 

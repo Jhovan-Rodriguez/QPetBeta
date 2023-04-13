@@ -24,13 +24,19 @@ $(document).ready(function() {
                         'Registro exitoso!',
                         'La cita se agendó correctamente!',
                         'success'
-                    )
+                    ).then(function() {
+                        // Redirigir al usuario a la página deseada
+                        window.location.href = '../views/miscitas.php';
+                      });
                 }else{
                     Swal.fire(
                         'Registro fallido!',
                         'La cita no se agendó correctamente!',
                         'error'
-                    );
+                    ).then(function() {
+                        // Redirigir al usuario a la página deseada
+                        window.location.href = '../views/miscitas.php';
+                      });
                 }
             }
         });

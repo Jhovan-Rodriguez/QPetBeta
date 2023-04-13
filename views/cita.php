@@ -11,7 +11,7 @@ $id_cita = $_REQUEST['id_cita'];
 
 <head>
     <meta charset="utf-8">
-    <title>Perfil</title>
+    <title>Cita</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -63,6 +63,22 @@ $id_cita = $_REQUEST['id_cita'];
             <!-- Navbar End -->
             <div class="container-fluid pt-4 px-4">
                 <div class="container">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-md-2">
+                            <h3>Cita</h3>
+                        </div>
+                        <div class="col-md-2">
+                            <?php if ($info_cita['activa'] == 1) { ?>
+                                <span class="badge alert-success">
+                                    En espera
+                                </span>
+                            <?php } else { ?>
+                                <span class="badge alert-danger">
+                                    Finalizada
+                                </span>
+                            <?php } ?>
+                        </div>
+                    </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col">
                             <div class="card p-3 py-4" id="card_principal">
@@ -88,8 +104,8 @@ $id_cita = $_REQUEST['id_cita'];
                                     <br>
                                     <h5>Mascota</h5>
                                     <hr>
-                                    <div class="row">
-                                        <div class="col-md-4 text-center" style="margin-top:10px;">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-4" style="margin-top:10px;">
                                             <div class="card p-4 mb-2 h-100">
                                                 <div class="d-flex justify-content-between">
                                                     <div class=" flex-row align-items-center">
@@ -130,8 +146,46 @@ $id_cita = $_REQUEST['id_cita'];
                                                 <?php echo $info_cita['raza'] ?>
                                             </p>
                                         </div>
+                                        <div class="col-md-4">
+                                            <h6>Sexo</h6>
+                                            <?php if ($info_cita['sexo'] == 1) { ?>
+                                                <p>Macho</p>
+                                            <?php } else { ?>
+                                                <p>Hembra</p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h6>Peso</h6>
+                                            <p>
+                                                <?php echo $info_cita['peso'] ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Altura</h6>
+                                            <p>
+                                                <?php echo $info_cita['altura'] ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Descripción</h6>
+                                            <p>
+                                                <?php echo $info_cita['descripcion'] ?>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+                                <?php if ($_SESSION['tipo_usuario'] == 2) { ?>
+                                    <div class="col-md-5">
+                                        <form action="../controller/actualizar_cita.php" method="post">
+                                            <input type="hidden" value="<?php echo $id_cita ?>" name="id_cita">
+                                            <button type="submit" class="btn btn-outline-primary m-2" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop"><i class="fa fa-hospital m-2"></i>Marcar
+                                                como Finalizada</button>
+                                        </form>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

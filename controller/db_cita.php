@@ -14,7 +14,7 @@
 
 	function get_citas($id_user){
 		global $pdo;
-		$sql = "SELECT m.nombre as nombre, c.fecha as fecha, c.hora as hora, c.activa as activa, c.id as id FROM cita as c JOIN mascota as m on c.id_mascota = m.id where m.id_usuario = '$id_user';";
+		$sql = "SELECT m.nombre as nombre,m.especie, c.fecha as fecha, c.hora as hora, c.activa as activa, c.id as id FROM cita as c JOIN mascota as m on c.id_mascota = m.id where m.id_usuario = '$id_user';";
 		$statement = $pdo->prepare($sql);
 		$statement->execute();
 		$results=$statement->fetchAll();

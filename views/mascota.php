@@ -67,6 +67,16 @@ $id_mascota = $_REQUEST['id_mascota'];
                 #Se busca la informacion de la mascota en la funcion del controlador
                 $mascota_info=search_pet($id_mascota);
                 ?>
+                <div class="col-md-5">
+                    <form method="POST" action="actualizar_mascota.php">
+                        <input type="hidden" name="id_mascota"
+                            value="<?php echo $_POST['id_mascota'];?>">
+                        <button type="submit" id="datos_mascota"
+                            class="btn btn-outline-primary m-2" data-bs-target="#staticBackdrop" ><i
+                                class="fa-solid fa-pen-to-square m-2"></i>Modificar
+                        </button>
+                    </form>
+                </div> 
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-6">
                         <img src="https://cdn-icons-png.flaticon.com/512/3047/3047886.png">
