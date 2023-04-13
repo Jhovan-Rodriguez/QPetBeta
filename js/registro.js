@@ -28,7 +28,6 @@ Array.from(forms).forEach(form => {
         //Se colocan los valores en el modal
         event.preventDefault();
         var datos = $(forms).serialize();
-        console.log(datos);
         $.ajax({ 
             type: "POST",
             url: "../controller/registrar.php",
@@ -36,6 +35,7 @@ Array.from(forms).forEach(form => {
             success: function (r) {
                 console.log(r);
                 var jsonData = JSON.parse(r);
+
                 if (jsonData.status == 1) {
                   Swal.fire(
                     'Registro exitoso!',
