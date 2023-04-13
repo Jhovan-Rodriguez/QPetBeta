@@ -34,7 +34,7 @@ $id_mascota = $_REQUEST['id_mascota'];
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-
+ 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 </head>

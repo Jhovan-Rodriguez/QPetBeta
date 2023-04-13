@@ -5,12 +5,12 @@ session_start();
 if ($_SESSION['user'] == null || $_SESSION['user'] == '') {
     header("Location:./404.php");
 }
-include_once("../controller/db_veterinary.php");
+include_once("../controller/db_cita.php");
 ?>
 
 <head>
     <meta charset="utf-8">
-    <title>Mis veterinarias</title>
+    <title>Mis citas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -34,7 +34,7 @@ include_once("../controller/db_veterinary.php");
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/mis_mascotas.css">
+    <link rel="stylesheet" href="../css/mis_citas.css">
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
@@ -52,9 +52,8 @@ include_once("../controller/db_veterinary.php");
         <!-- Spinner End -->
         <?php
         include("../layouts/aside.php");
-        $veterinarias = veterinarias();
+        $citas = get_citas($_SESSION['id']);
         ?>
-        
 
         <!-- Content Start -->
         <div class="content">
@@ -67,38 +66,60 @@ include_once("../controller/db_veterinary.php");
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="bg-light rounded h-100 p-4">
-                        <h4 class="mb-4">Veterinarias</h4>
+                        <h4 class="mb-4">Citas</h4>
                         <div class="container mt-5 mb-3">
                             <div class="row">
                                 <?php
-                                foreach ($veterinarias as $datos => $data) {
+                                foreach ($citas as $datos => $data) {
                                     ?>
                                     <div class="col-md-4" style="margin-top:10px;">
                                         <div class="card p-4 mb-2 h-100">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex flex-row align-items-center">
+                                                    <?php if ($data['especie'] == 'Perro') { ?>
+                                                        <div class="icon"><img src="../img/happy.png"
+                                                                style="width: 75%; height: 75%;"
+                                                                alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php } else { ?>
+                                                        <div class="icon"><img src="../img/kitty.png"
+                                                                style="width: 75%; height: 75%;"
+                                                                alt="<?php echo $data['nombre'] ?>"></div>
+                                                    <?php } ?>
                                                     <div class="ms-2 c-details">
-                                                        <h6 class="mb-0"> <?php echo $data['nombre'] ?> </h6> 
-                                                        <span> <?php echo $data['calle'] ?> </span> <br>
-                                                        <span> <?php echo $data['telefono'] ?> </span>
+                                                        <h6 class="mb-0">
+                                                            <?php echo $data['nombre'] ?>
+                                                        </h6> 
+                                                        <span>
+                                                            <?php echo $data['fecha'] ?>
+                                                        </span>
+                                                        <br>
+                                                        <span>
+                                                            <?php echo $data['hora'] ?>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="badge"> 
-                                                    <?php if($data['disponible'] == 1){ ?>
-                                                        <span> Disponible </span> 
+                                                    <?php if($data['activa']==1){ ?>
+                                                        <span class="badge text-bg-success">
+                                                            En espera
+                                                        </span> 
                                                     <?php }else{ ?>
-                                                        <span> No disponible </span> 
-                                                    <?php } ?>   
+                                                        <span class="badge text-bg-danger">
+                                                            Finalizada
+                                                        </span>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                             <div class="mt-5">
-                                                <form method="POST" action="veterinaria.php">
-                                                    <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
-                                                    <input type="hidden" name="id_veterinaria" value="<?php echo $data['id']; ?>">
-                                                    <button type="submit" id="datos_veterinaria" class="btn btn-outline-primary w-100">
-                                                        <i class="bi bi-house-heart me-2"></i>Ver más de <?php echo $data['nombre'] ?>
+                                                <form method="POST" action="cita.php">
+                                                    <input type="hidden" name="id_cita"
+                                                        value="<?php echo $data['id']; ?>">
+                                                    <button type="submit" id="datos_mascota"
+                                                        class="btn btn-outline-primary w-100"><i
+                                                        class="bi bi-calendar-heart-fill me-2"></i>Detalle cita
                                                     </button>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -124,6 +145,8 @@ include_once("../controller/db_veterinary.php");
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/chart/chart.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>

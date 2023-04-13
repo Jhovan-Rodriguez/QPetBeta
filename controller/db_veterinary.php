@@ -25,6 +25,18 @@ function get_veterinaries($duehno)
 	return $results;
 }
 
+function veterinarias(){
+	global $pdo;
+
+	$sql = "SELECT * FROM veterinaria";
+	$statement = $pdo->prepare($sql);
+	$statement->execute();
+	$results = $statement->fetchAll();
+
+	return $results;
+}
+
+
 function search_veterinary($id_veterinary)
 {
 	global $pdo;

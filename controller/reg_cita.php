@@ -8,7 +8,7 @@
     $mascota=$_REQUEST['mascota'];
     $comentario=$_REQUEST['comentario'];
 
-    $sql = "INSERT INTO cita(fecha, hora, comentario, id_veterinaria, id_mascota) VALUES('$fecha','$hora','$comentario','$id_veterinaria','$mascota')";
+    $sql = "INSERT INTO cita(fecha, hora, comentario, id_veterinaria, id_mascota,activa) VALUES('$fecha','$hora','$comentario','$id_veterinaria','$mascota','1')";
     $statement = $pdo->prepare($sql);
     $statement->execute();
     if (!$statement) {
